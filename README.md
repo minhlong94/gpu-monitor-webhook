@@ -20,5 +20,8 @@ GPU free: ['0', '1', '2', '3']
 
 That's all
 
+## Why this script?
+If user searches Google with the term "Monitor GPU usage", it will give [gputil](https://github.com/anderskm/gputil) or [gpustat](https://github.com/wookayin/gpustat). However, *it requires SUDO privilege* to be installed properly, which sucks. I want a script that can be run without SUDO privilege, plus can notify me somehow, so here we are.
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
