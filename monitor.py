@@ -79,20 +79,24 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process webhook URL.')
 
     # Add the webhook URL argument
-    parser.add_argument('webhook_url', help='The URL of the webhook.')
+    parser.add_argument('--webhook_url', help='The URL of the webhook.')
 
     # Add the monitor interval argument as seconds
-    parser.add_argument('seconds', type=int, help='The number of seconds to wait before sending the webhook.')
+    parser.add_argument('--seconds', type=int, help='The number of seconds to wait before sending the next webhook.')
+
+    # Add optional arg for users to choose max usage by others
+    parser.add_argument('--max_usage_by_others_gb', type=float, default=1.0, help='The maximum usage by others in MB.')
 
     # Parse the command-line arguments
     args = parser.parse_args()
     webhook_url = args.webhook_url
+    max_usage_by_others_mb = args.max_usage_by_others_gb * 1024
 
     while True:
         print("GPU memory usage information:")
         print(json.dumps(get_gpu_usage(), indent=4))
         print()
-        free_gpus = get_free_gpus()
+        free_gpus = get_free_gpus(max_usage_by_others_mb)
         print("GPU ids of free GPUs:", free_gpus)
 
         if free_gpus:
